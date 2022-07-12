@@ -22,6 +22,7 @@ async def git_clone(ctx, url: str, branch: str = 'master'):
 		cw.set_value('user', 'name', config['github-username'])
 		cw.set_value('user', 'email', config['github-email'])
 		cw.release()
+	repo.set_working_repo(name)
 	await ctx.send('I have cloned the repo!')
 
 @commands.command()
