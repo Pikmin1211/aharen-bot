@@ -12,6 +12,8 @@ config_file.close()
 @commands.command()
 async def git_clone(ctx, url: str, branch: str = 'master'):
 	await ctx.send('Working on it... please be patient.')
+	if (url[-1] == '/'):
+		url = url[:-1]
 	name = url.split('/')[-1]
 	url = 'https://{0}:{1}@{2}.git'.format(config['github-username'], config['github-token'], url.replace('https://', ''))
 	Repo.clone_from(url, os.path.join(repo.get_dir_repos(), name), branch=branch)
@@ -28,7 +30,7 @@ async def git_commit(ctx, message: str = default_message, name: str = '', file: 
 		name = repo.get_working_repo()
 	else:
 		repo.set_working_repo(name)
-	for rp in get_repos():
+	for rp in repo.get_repos():
 		if rp[0].lower() == name.lower():
 			rp[1].git.add(file)
 			rp[1].git.commit(m=message)
