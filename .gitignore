@@ -1,7 +1,5 @@
 
 __pycache__/
-FE-CLib/
 config.json
-repos/
 *.cache
 *.cmd
